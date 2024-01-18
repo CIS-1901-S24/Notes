@@ -221,7 +221,7 @@ This means that the value you pass to the function is copied, so if you pass a v
 By passing a pointer to the variable, we can access it from inside the function, allowing us to, in some sense, simulate passing by reference.
 In the below example, we pass the quotient and remainder variables by reference, so that the function can update both of those variables from inside the function.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/7321c2e83cd32360920723c2adaaca8c9dca87f0/01/remainder.c#L1-L20
+https://github.com/CIS-1901-F24/Notes/blob/aa282f7a8d0375a05e28448ec68fe91aa2a95295/01/remainder.c#L1-L20
 
 The second reason deals with memory allocation.
 Sometimes, regular variables allocated on the stack are not sufficient.
@@ -241,7 +241,7 @@ When a variable goes out of scope, its data is automatically deallocated later, 
 Sometimes, this is undesirable, and we want memory that stays alive for as long as we want.
 Manually allocated memory using `malloc` has this property, which is another use of pointers.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/7321c2e83cd32360920723c2adaaca8c9dca87f0/01/malloc.c#L1-L33
+https://github.com/CIS-1901-F24/Notes/blob/aa282f7a8d0375a05e28448ec68fe91aa2a95295/01/malloc.c#L1-L33
 
 ### `const`
 
@@ -301,7 +301,7 @@ Modifying this array is perfectly fine and does not result in undefined behavior
 
 Consider the following program:
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/7321c2e83cd32360920723c2adaaca8c9dca87f0/01/debug.c#L1-L21
+https://github.com/CIS-1901-F24/Notes/blob/aa282f7a8d0375a05e28448ec68fe91aa2a95295/01/debug.c#L1-L21
 
 Once we compile this program (with the `-g` flag!), we can use `gdb` to load (TODO) the executable using `gdb debug` if `debug` is the name of the executable.
 This will start `gdb`, and you can then start running the program by typing `run`.
@@ -339,4 +339,4 @@ Once the executable terminates, it will give you a report of memory leaks.
 
 For example, try compiling the following program which exhibits a memory leak, and see what `valgrind` tells you:
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/7321c2e83cd32360920723c2adaaca8c9dca87f0/01/leak.c#L1-L6
+https://github.com/CIS-1901-F24/Notes/blob/aa282f7a8d0375a05e28448ec68fe91aa2a95295/01/leak.c#L1-L6

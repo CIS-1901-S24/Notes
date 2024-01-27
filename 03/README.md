@@ -5,7 +5,7 @@
 The `struct`s that you are familiar with from C are classes in C++.
 Whereas C they were special "`struct` types" and had to be used with the `struct keyword` (e.g. `struct point p`), in C++ they are first class types, and do not require a special keyword (e.g. `point p`).
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/dae4e4bafe7029d978bd2521ae05d76ffefdf46b/04/point1.cpp#L1-L22
+https://github.com/CIS-1901-F24/Notes/blob/c6d2bac48e123afba17050fec0d19c704f508574/03/point1.cpp#L1-L22
 
 As an aside, in this code we use the `cmath` header for `sqrt`.
 This is just the C `math.h` header, but converted to C++ conventions, with improvements like namespaces and more precise types.
@@ -24,7 +24,7 @@ Rather than writing the access specifiers for each member of the class like in J
 With a `class`, members are private by default and with a `struct`, members are public by default.
 This is the *only* difference between `class` and `struct`.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/dae4e4bafe7029d978bd2521ae05d76ffefdf46b/04/point2.cpp#L1-L27
+https://github.com/CIS-1901-F24/Notes/blob/c6d2bac48e123afba17050fec0d19c704f508574/03/point2.cpp#L1-L27
 
 ### Constructors
 
@@ -34,7 +34,7 @@ This is the constructor used (by default) when creating an object without any ar
 In the code above, C++ generates an implicit default constructor for us since we didn't define one, and it is called when we create the object.
 Now we can define our own constructor, which also removes the auto-generated default constructor:
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/dae4e4bafe7029d978bd2521ae05d76ffefdf46b/04/point3.cpp#L1-L25
+https://github.com/CIS-1901-F24/Notes/blob/c6d2bac48e123afba17050fec0d19c704f508574/03/point3.cpp#L1-L25
 
 The part after the constructor's parameter list is known as the *initializer list*, and is used to initialize member variables.
 Note that initializing a member variable in the initializer list is different from assigning to it in the body of the constructor.
@@ -52,7 +52,7 @@ If we do this and remove our other constructor as well, then this would make it 
 
 Default values for member variables can also be specified where they are declared, which is used to initialize the variable if it was not already initialized in an initializer list.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/dae4e4bafe7029d978bd2521ae05d76ffefdf46b/04/point4.cpp#L1-L24
+https://github.com/CIS-1901-F24/Notes/blob/c6d2bac48e123afba17050fec0d19c704f508574/03/point4.cpp#L1-L24
 
 ### `const`
 
@@ -61,7 +61,7 @@ Disallowing all member functions to be called on `const` objects would be too re
 This is done by adding `const` to the end of the member function declaration, and the compiler checks that the definition of the function does not mutate the object.
 These `const` member functions are the only ones that can be called on `const` objects.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/dae4e4bafe7029d978bd2521ae05d76ffefdf46b/04/point5.cpp#L1-L25
+https://github.com/CIS-1901-F24/Notes/blob/c6d2bac48e123afba17050fec0d19c704f508574/03/point5.cpp#L1-L25
 
 
 ### Operator Overloading
@@ -73,7 +73,7 @@ Following this intuition, overloading an operator for your class can be a member
 For example, overloading addition for two `point`s can be either a member function inside the `point` class or a free function.
 But since the operator has to access private members of your class, it must be defined as a member function here:
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/dae4e4bafe7029d978bd2521ae05d76ffefdf46b/04/point6.cpp#L1-L30
+https://github.com/CIS-1901-F24/Notes/blob/c6d2bac48e123afba17050fec0d19c704f508574/03/point6.cpp#L1-L30
 
 
 ## C++ (and C) Compilation Model
@@ -94,9 +94,9 @@ In the linking phase, the linker finally goes into the different translation uni
 
 Here is the split-up version of the `point` code above, which you can compile by just listing both `.cpp` files together in the usual compilation command:
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/dae4e4bafe7029d978bd2521ae05d76ffefdf46b/04/separate/point.hpp#L1-L24
-https://github.com/CIS-1900-F23/Fall-2023/blob/dae4e4bafe7029d978bd2521ae05d76ffefdf46b/04/separate/point.cpp#L1-L37
-https://github.com/CIS-1900-F23/Fall-2023/blob/dae4e4bafe7029d978bd2521ae05d76ffefdf46b/04/separate/main.cpp#L1-L14
+https://github.com/CIS-1901-F24/Notes/blob/c6d2bac48e123afba17050fec0d19c704f508574/03/separate/point.hpp#L1-L24
+https://github.com/CIS-1901-F24/Notes/blob/c6d2bac48e123afba17050fec0d19c704f508574/03/separate/point.cpp#L1-L37
+https://github.com/CIS-1901-F24/Notes/blob/c6d2bac48e123afba17050fec0d19c704f508574/03/separate/main.cpp#L1-L14
 
 Notice that we need to prepend `point::` to the function name when defining them in the `.cpp` file.
 This is like a namespace, where we are specifying that we mean the function found in the `point` class.
@@ -138,7 +138,7 @@ This is the alternative to using something like Java's `super()`.
 
 The entire example is presented here:
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/dae4e4bafe7029d978bd2521ae05d76ffefdf46b/04/inheritance.cpp#L1-L58
+https://github.com/CIS-1901-F24/Notes/blob/c6d2bac48e123afba17050fec0d19c704f508574/03/inheritance.cpp#L1-L58
 
 We now go over the different portions one by one.
 
@@ -230,7 +230,7 @@ Buffered output is better for performance, however if your program crashes then 
 For this reason, strerr is not buffered so no error messages are lost in this way.
 An example of this can be seen by the below program:
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/006eb1435f769b1f02f1677fcfdd0fe4e59eb3e9/03/buffered.cpp#L1-L21
+https://github.com/CIS-1901-F24/Notes/blob/c6d2bac48e123afba17050fec0d19c704f508574/03/buffered.cpp#L1-L21
 
 This example uses `flush()`, a *member function* (what we call methods in C++) on `ostream`s to manually flush the buffer, forcing the print to stdout to occur.
 It also uses `endl`, which represents printing a newline to the stream and then flushing its buffer.
@@ -257,7 +257,7 @@ This could also be something like a letter when you are reading an `int`.
 For example, if I am reading an `int` using `cin >> i` and I type in `1a`, `1` will be read into `i` and `cin` will stop there.
 Later on you can read the `a` separately by reading a `char` or a `string` (more on `string`s after the example).
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/006eb1435f769b1f02f1677fcfdd0fe4e59eb3e9/03/cin.cpp#L1-L13
+https://github.com/CIS-1901-F24/Notes/blob/c6d2bac48e123afba17050fec0d19c704f508574/03/cin.cpp#L1-L13
 
 A useful type that we use here is `string`, a much safer alternative to using C strings (`char` arrays).
 `string`s automatically resize and can be easily appended using `+`, as with most other languages.
@@ -272,7 +272,7 @@ The most common way this can happen if they have reached the end of input by enc
 Alternatively, you could also call the `fail()` member function to check if the implicit conversion returns `false` (e.g. `if (!cin.fail())` is equivalent to `if (cin)`).
 Using these features together, we can write programs that read all of the input:
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/006eb1435f769b1f02f1677fcfdd0fe4e59eb3e9/03/readall.cpp#L1-L12
+https://github.com/CIS-1901-F24/Notes/blob/c6d2bac48e123afba17050fec0d19c704f508574/03/readall.cpp#L1-L12
 
 ## File Streams
 
@@ -287,7 +287,7 @@ When the file stream object goes out of scope, it cleans up the file handle, so 
 
 Apart from these ways of associating the stream with a file, these streams are subclasses of `istream` and `ostream`, so they can be used in the same way as the streams we have already seen:
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/006eb1435f769b1f02f1677fcfdd0fe4e59eb3e9/03/fstream.cpp#L1-L25
+https://github.com/CIS-1901-F24/Notes/blob/c6d2bac48e123afba17050fec0d19c704f508574/03/fstream.cpp#L1-L25
 
 Since these streams need to open files, there are also new ways the streams can fail, as shown in the example.
 
@@ -320,4 +320,4 @@ Furthermore, neither this nor defining it as a free function would give us acces
 
 The solution to this is the `friend` keyword, which marks a free function as a "friend" of your class, giving it the same access as a member function.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/dae4e4bafe7029d978bd2521ae05d76ffefdf46b/04/point7.cpp#L1-L58
+https://github.com/CIS-1901-F24/Notes/blob/c6d2bac48e123afba17050fec0d19c704f508574/03/point7.cpp#L1-L58

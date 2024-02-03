@@ -2,13 +2,28 @@
 
 In this classes, we will study special constructors and destructors for classes.
 
+
+### Classes with resources
+
+If all of a class's members are regular variables, then things are easy.
+Passing objects of that class around works fine, and copying the object just copies each of its members.
+
+But when a class holds a *resource* that must be manually managed, like dynamically allocated memory, things get more complex.
+For example, using objects of the following class would result in a memory leak, since the memory allocated using `new` is never deallocated with `delete`.
+
+https://github.com/CIS-1901-F24/Notes/blob/25723f3a848b9b9d8c145354fd8806a8c18faeb4/04/eg0.cpp#L1-L32
+
+Other examples of resources include things like file handles, locks, or remote web connections.
+These examples all need to be "cleaned up" once used, which also makes *copying*, a core concept in C++, more complex.
+In these notes, we will go over five special functions that handle these sort of operations on objects.
+
 ## Destructors
 
 To handle cleanup, C++ has destructors, which are like the inverse of a constructor.
 These are defined like a constructor, but with a `~` in front and has no arguments.
 While constructors were present in other languages before C++, destructors were a novel feature introduced by C++.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/4b1add80a047a959417dc75de98ec4734bf8b3c2/04/eg1.cpp#L1-L38
+https://github.com/CIS-1901-F24/Notes/blob/25723f3a848b9b9d8c145354fd8806a8c18faeb4/04/eg1.cpp#L1-L38
 
 The destructor will be called automatically when the object is cleaned up, either when it goes out of scope for a regular variable or when `delete` is called on it for objects dynamically allocated using `new`.
 You should never have to manually call the destructor.
@@ -42,7 +57,7 @@ This is because there can be multiple constructors with multiple orderings, but 
 
 If you try to initialize members out of order like in the following code, then you will get a compiler warning, and things will probably not work as you expect (try running the code!):
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/4b1add80a047a959417dc75de98ec4734bf8b3c2/04/order.cpp#L1-L20
+https://github.com/CIS-1901-F24/Notes/blob/25723f3a848b9b9d8c145354fd8806a8c18faeb4/04/order.cpp#L1-L20
 
 Now back to the destructor.
 It should run in the opposite order as construction, so it first runs the destructor body, then destroys the members variables in reverse order of declaration, and finally calling the destructors of base classes.
@@ -69,7 +84,7 @@ Copies are made when:
 
 Here is an example of (1), where you can see we are calling our copy constructor:
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/e8c1abc835fc37c9f45ee4e0eb5604879d446a03/05/eg2.cpp#L1-L47
+https://github.com/CIS-1901-F24/Notes/blob/25723f3a848b9b9d8c145354fd8806a8c18faeb4/04/eg2.cpp#L1-L47
 
 Try commenting out the copy constructor to see the default shallow copy in action, causing a crash.
 
@@ -77,7 +92,7 @@ Try commenting out the copy constructor to see the default shallow copy in actio
 
 To illustrate the other common ways objects are copied (2 and 3), we introduce a new function to our example:
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/e8c1abc835fc37c9f45ee4e0eb5604879d446a03/05/eg3.cpp#L1-L48
+https://github.com/CIS-1901-F24/Notes/blob/25723f3a848b9b9d8c145354fd8806a8c18faeb4/04/eg3.cpp#L1-L48
 
 Looking at the rules for when copies are made above, you might think that this code would perform three copies.
 One when `i` is passed to `incr`, one when `i` is returned from `incr`, and one when `j` is constructed from this returned object.
@@ -91,7 +106,7 @@ The specifics are not super important, but it is important that you keep in mind
 
 The first four ways that copies can occur all use the copy constructor, but the last has to do with assignment, which is when we use the `=` operator directly.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/e8c1abc835fc37c9f45ee4e0eb5604879d446a03/05/eg4.cpp#L1-L56
+https://github.com/CIS-1901-F24/Notes/blob/25723f3a848b9b9d8c145354fd8806a8c18faeb4/04/eg4.cpp#L1-L56
 
 Note that `operator=` returns a reference to the assigned object.
 This is to allow things like `i = j = k;`, which would be equivalent to `j = k; i = j;` since `=` is right associative.
@@ -111,7 +126,7 @@ Sometimes, copies are made of objects that are about to be cleaned up, for examp
 In these cases, C++ provides a useful mechanism to avoid the unnecessary copy by simply *moving* the object that is about to be cleaned up into the new object being created.
 This is done using a constructor called a move constructor.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/e8c1abc835fc37c9f45ee4e0eb5604879d446a03/05/eg5.cpp#L1-L61
+https://github.com/CIS-1901-F24/Notes/blob/25723f3a848b9b9d8c145354fd8806a8c18faeb4/04/eg5.cpp#L1-L61
 
 Our move constructor "steals" the pointer from the other object and crucially, resets its pointer to `nullptr`.
 This is to prevent it from `delete`ing the memory when its destructor runs.
@@ -149,7 +164,7 @@ If you are really interested, [this in-depth explanation](https://stackoverflow.
 Just like with the copy assignment earlier, we need to handle assignment separately from construction.
 The move assignment provides an optimization when we assign to an `integer` using a temporary.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/e8c1abc835fc37c9f45ee4e0eb5604879d446a03/05/eg6.cpp#L1-L73
+https://github.com/CIS-1901-F24/Notes/blob/25723f3a848b9b9d8c145354fd8806a8c18faeb4/04/eg6.cpp#L1-L73
 
 Here, the return value of `incr` is an rvalue, so the move assignment operator is called rather than copy assignment.
 Note that self assignment cannot happen with move assignment, since a variable is an lvalue.
@@ -161,7 +176,7 @@ But C++ provides a way to move lvalues as well, with `std::move` (found in `<uti
 `move(e)` effectively "casts" an lvalue `e` into an rvalue, forcing a move.
 The move will change `e`, however, so you must be careful to not use it any more after the move.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/e8c1abc835fc37c9f45ee4e0eb5604879d446a03/05/eg7.cpp#L1-L73
+https://github.com/CIS-1901-F24/Notes/blob/25723f3a848b9b9d8c145354fd8806a8c18faeb4/04/eg7.cpp#L1-L73
 
 This code moves `i` to avoid the copy, even though it's an lvalue.
 It would not be valid to use `i` after the move, since its memory has been "stolen" and it is no longer in a usable state.

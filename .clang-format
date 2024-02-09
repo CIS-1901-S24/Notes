@@ -1,0 +1,14 @@
+BasedOnStyle: Microsoft
+AccessModifierOffset: -4
+AlignConsecutiveDeclarations: "true"
+BinPackArguments: "false"
+BinPackParameters: "false"
+IndentWidth: "4"
+AlignConsecutiveAssignments: "true"
+ColumnLimit: 100
+BreakBeforeBraces: Allman
+AllowShortIfStatementsOnASingleLine: false
+SpacesBeforeTrailingComments: 1
+PointerAlignment: Left
+AlwaysBreakTemplateDeclarations: true
+NamespaceIndentation: All

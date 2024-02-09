@@ -37,7 +37,7 @@ Alternatively, there are resumption semantics, where the exception handler is me
 Some other languages support this model, but C++ is not one of them.
 If there is no appropriate `catch`, then the stack continues to be unwound until an appropriate `catch` is found, or if there is nothing left to unwind, in which case the program will crash.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/530f4e3da12292ca6ef472690e5ccc82641efade/06/exceptions.cpp#L1-L34
+https://github.com/CIS-1901-F24/Notes/blob/e1c50a67237e406ac4695ca8fb3c0f4ff1710292/05/exceptions.cpp#L1-L34
 
 As we see in this example, unlike other languages languages, in C++ we can throw any type, not just exception types.
 The `<stdexcept>` header does contain a base `exception` class and some subclasses representing some common exception types.
@@ -64,7 +64,7 @@ If an exception is thrown *while* stack unwinding is happening due to another th
 If a function should not ever throw, it can be labeled `noexcept`.
 If the `noexcept` function does end up throwing, instead of propagating the exception, the program will instead terminate, even if there is an exception handler available somewhere.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/530f4e3da12292ca6ef472690e5ccc82641efade/06/noexcept.cpp#L1-L21
+https://github.com/CIS-1901-F24/Notes/blob/e1c50a67237e406ac4695ca8fb3c0f4ff1710292/05/noexcept.cpp#L1-L21
 
 Implicitly-defined functions are `noexcept` by default, unless one of the functions that they automatically call (like the copy constructor of a member variable, for the implicitly-defined copy constructor) is not `noexcept`.
 If you are defining these functions yourself and they are not supposed to throw, you should label it as `noexcept` yourself.
@@ -96,7 +96,7 @@ If the copy fails, the original object being copied into is not affected, only t
 The swap never occurs since an exception was thrown and would skip the rest of the copy assignment.
 An example with this, using the `integer` example from last class, is as follows:
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/530f4e3da12292ca6ef472690e5ccc82641efade/06/swap1.cpp#L1-L74
+https://github.com/CIS-1901-F24/Notes/blob/e1c50a67237e406ac4695ca8fb3c0f4ff1710292/05/swap1.cpp#L1-L74
 
 We use `std::swap` to swap members of the two objects, (found in the `<utility>` header, and some other standard headers) which is `noexcept`.
 So now the only possible source of exceptions is the copy/move constructor, and if it does throw, the original object is unchanged, giving us a strong guarantee.
@@ -111,7 +111,7 @@ Note that the only difference between the two assignment operators is that the c
 Since we need a temporary anyways, we can just do this by passing by value!
 If the value being assigned from is an lvalue, then C++ will choose to copy, and if it is an rvalue, then C++ will choose to move, which is exactly what we were doing before.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/530f4e3da12292ca6ef472690e5ccc82641efade/06/swap2.cpp#L1-L61
+https://github.com/CIS-1901-F24/Notes/blob/e1c50a67237e406ac4695ca8fb3c0f4ff1710292/05/swap2.cpp#L1-L61
 
 This code now only has one assignment operator, which makes a temporary using either a copy or a move, and then swapping using it.
 
@@ -132,7 +132,7 @@ Other functions also use `swap`, like the standard library sorting algorithms.
 The definition of our custom `swap` is simple, and it is the same as what used to be in the assignment operator, just swapping all the member variables of our object.
 Now in the definition of `operator=`, we can call our `swap` to swap the two `integer` objects:
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/530f4e3da12292ca6ef472690e5ccc82641efade/06/swap3.cpp#L1-L68
+https://github.com/CIS-1901-F24/Notes/blob/e1c50a67237e406ac4695ca8fb3c0f4ff1710292/05/swap3.cpp#L1-L68
 
 Now that we have our custom `swap` and `std::swap`, how does C++ know which to use?
 If `std::swap` was imported using `using`, then both can be called using `swap`.
@@ -198,7 +198,7 @@ This is because a shallow copy is clearly unsafe, it breaks the invariant that `
 A deep copy is also not clearly desirable, so it is disabled.
 If you want a deep copy, you can do this manually by creating a new `unique_ptr` and initializing it with a copy of the memory pointed to by the other `unique_ptr`.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/530f4e3da12292ca6ef472690e5ccc82641efade/06/unique.cpp#L1-L42
+https://github.com/CIS-1901-F24/Notes/blob/e1c50a67237e406ac4695ca8fb3c0f4ff1710292/05/unique.cpp#L1-L42
 
 Finally, it's also possible to customize what happens on destruction, which can be useful for holding other pointer resources, like `FILE *`, which must be deallocated using `fclose`.
 
@@ -213,7 +213,7 @@ Doing the latter will lead to the two `shared_ptr`s not knowing about each other
 Instead, to have multiple shared owners of the same memory, create a `shared_ptr` and copy it using either the copy constructor or the assignment operator.
 This will properly use the internal systems of the `shared_ptr` to increment the reference count properly.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/530f4e3da12292ca6ef472690e5ccc82641efade/06/shared.cpp#L1-L33
+https://github.com/CIS-1901-F24/Notes/blob/e1c50a67237e406ac4695ca8fb3c0f4ff1710292/05/shared.cpp#L1-L33
 
 ### `weak_ptr`
 
@@ -224,7 +224,7 @@ If the original `shared_ptr` no longer holds that memory, then `lock()` returns 
 If that `shared_ptr` is still holding the original pointer, then `lock()` returns a copied `shared_ptr`, allowing us to use it to do standard pointer operations.
 Since this made a copy, the reference count increased by one and it is guaranteed that the pointer stays alive for the duration of this `shared_ptr`.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/530f4e3da12292ca6ef472690e5ccc82641efade/06/weak.cpp#L1-L41
+https://github.com/CIS-1901-F24/Notes/blob/e1c50a67237e406ac4695ca8fb3c0f4ff1710292/05/weak.cpp#L1-L41
 
 One essential use of `weak_ptr` is to break cycles in `shared_ptr`s.
 As shown in the code above, if two objects have `shared_ptr`s to each other, the reference count will never fall to 0, and the two objects will never be destroyed, leading to a memory leak.
@@ -241,7 +241,7 @@ For exceptions that are thrown in the body of the constructor, they can be wrapp
 However, there is also the initalizer list, which can also throw exceptions.
 To handle this, you can use a *function-try-block*, which is like a try-catch around the entire constructor, *including* the initializer list.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/530f4e3da12292ca6ef472690e5ccc82641efade/06/ctor1.cpp#L1-L41
+https://github.com/CIS-1901-F24/Notes/blob/e1c50a67237e406ac4695ca8fb3c0f4ff1710292/05/ctor1.cpp#L1-L41
 
 This function-try-block can then handle exceptions from the initializer list.
 One thing to note is that any catch clauses of a function-try-block *must* rethrow, and will rethrow the exception for you if you don't do it, like in the example above.
@@ -254,7 +254,7 @@ Finally, note that the code above is not very good---it requires us to know that
 To handle this in general, we should use RAII, just like everywhere else in C++.
 By using a smart pointer here, only the smart pointers that were successfully constructed will be destructed, `delete`ing the allocated memory just as desired, without having to know in advance which allocations will succeed and which will fail.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/530f4e3da12292ca6ef472690e5ccc82641efade/06/ctor2.cpp#L1-L37
+https://github.com/CIS-1901-F24/Notes/blob/e1c50a67237e406ac4695ca8fb3c0f4ff1710292/05/ctor2.cpp#L1-L37
 
 Now that we can properly exceptions in our constructors, the copy and swap example from earlier can finally be fully safe and leak-free.
 A failing copy constructor would not leak memory, and get properly cleaned up by the function-try-block.

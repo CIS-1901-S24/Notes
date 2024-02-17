@@ -21,7 +21,7 @@ You could also use `class` instead of `typename`, but I prefer `typename`, since
 `class` is the older syntax, and is more common in older code.
 Here is an example of how the standard library `std::swap` might be implemented:
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/52e31b2599ee8fee1d60f096bebb224f71ab13d1/07/function_template.cpp#L1-L33
+https://github.com/CIS-1901-F24/Notes/blob/57c31bb0a48c6dcf311909887de4f3835d2d6dc2/06/function_template.cpp#L1-L33
 
 Here, we were not required to explicitly give the template argument when we called `my_swap`, since the compiler can deduce it from the arguments we pass.
 This example also includes an alternate way of writing function templates called an [abbreviated function template](https://en.cppreference.com/w/cpp/language/function_template#Abbreviated_function_template): using `auto`.
@@ -31,7 +31,7 @@ Here, this use of `auto` is not ideal, because for a `swap` function we really w
 Last class, we talked about the fact that most parts of the standard standard library are *not* object-oriented, to avoid the overhead of virtual functions.
 Instead, we can use templates to write code that abstracts over these types, since they still have a common interface, just not one that is formalized in a base class.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/52e31b2599ee8fee1d60f096bebb224f71ab13d1/07/containers.cpp#L1-L21
+https://github.com/CIS-1901-F24/Notes/blob/57c31bb0a48c6dcf311909887de4f3835d2d6dc2/06/containers.cpp#L1-L21
 
 Note that templates are not a complete replacement for subtyping and virtual functions.
 While templates are useful for writing code for different types, they do *not* provide dynamic dispatch, where the program can choose which function to call based on what type an object has, all at *run time*.
@@ -43,7 +43,7 @@ They generate code and call functions for different types, based purely on compi
 We can also write *class templates*.
 We've seen lots of examples of these already, like smart pointers and container classes.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/52e31b2599ee8fee1d60f096bebb224f71ab13d1/07/class_template.cpp#L1-L29
+https://github.com/CIS-1901-F24/Notes/blob/57c31bb0a48c6dcf311909887de4f3835d2d6dc2/06/class_template.cpp#L1-L29
 
 Unlike function templates, there is no abbreviated version using `auto`, since it is typically essential to refer to the name of the type in a class template.
 
@@ -58,11 +58,11 @@ You could do this directly, like in our example above, or you could break up the
 The class definition would go in a header file as usual, and the function definitions can go into an implementation file (usually with a `.tpp` file extension for template implementations), which is then `#include`d at the bottom of the header.
 The following shows this approach for the same `wrapper` class example as earlier:
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/52e31b2599ee8fee1d60f096bebb224f71ab13d1/07/templates/wrapper.hpp#L1-L17
+https://github.com/CIS-1901-F24/Notes/blob/57c31bb0a48c6dcf311909887de4f3835d2d6dc2/06/templates/wrapper.hpp#L1-L17
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/52e31b2599ee8fee1d60f096bebb224f71ab13d1/07/templates/wrapper.tpp#L1-L15
+https://github.com/CIS-1901-F24/Notes/blob/57c31bb0a48c6dcf311909887de4f3835d2d6dc2/06/templates/wrapper.tpp#L1-L15
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/52e31b2599ee8fee1d60f096bebb224f71ab13d1/07/templates/main.cpp#L1-L11
+https://github.com/CIS-1901-F24/Notes/blob/57c31bb0a48c6dcf311909887de4f3835d2d6dc2/06/templates/main.cpp#L1-L11
 
 ## Type Constraints
 
@@ -138,7 +138,7 @@ C++ allows us to define *type constraints* for templates, or requirements on typ
 These requirements are then enforced at compile-time, and result in better error messages.
 For the `print` example from before, we can add a requirement that the template argument be a `range` (from the `ranges` library), or something that can be iterated through using `begin()` and `end()` iterators:
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/52e31b2599ee8fee1d60f096bebb224f71ab13d1/07/print_error.cpp#L1-L26
+https://github.com/CIS-1901-F24/Notes/blob/57c31bb0a48c6dcf311909887de4f3835d2d6dc2/06/print_error.cpp#L1-L26
 
 Compiling this function now gives an error like:
 
@@ -183,7 +183,7 @@ As another example, if we consider the previous `wrapper` code, then using a typ
 However, if we never call `set`, then `wrapper<foo>::set` is never generated, and the code compiles without error.
 By adding a type constraint `copyable`, we can catch this error "early" in compilation, rather than "late" as is usual with templates:
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/52e31b2599ee8fee1d60f096bebb224f71ab13d1/07/wrapper_error.cpp#L1-L37
+https://github.com/CIS-1901-F24/Notes/blob/57c31bb0a48c6dcf311909887de4f3835d2d6dc2/06/wrapper_error.cpp#L1-L37
 
 Comment out the type constraint to see this code successfully compile as long as `set` is not called.
 
@@ -201,7 +201,7 @@ The ones in the example above all are requirements on a single type, but concept
 
 In the following example, we define a concept requiring that the type `T` allows `const T &`s to be added using `+`:
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/52e31b2599ee8fee1d60f096bebb224f71ab13d1/07/concepts.cpp#L1-L23
+https://github.com/CIS-1901-F24/Notes/blob/57c31bb0a48c6dcf311909887de4f3835d2d6dc2/06/concepts.cpp#L1-L23
 
 Concepts are essentially predicates that are checked by the compiler at compile-time.
 This concept checks that `x + x` is a valid expression.
@@ -250,7 +250,7 @@ This is the same as `typedef`, and is equivalent to `typedef T value_type;` in C
 
 When using such member types, it is necessary to prepend `typename` to the member type, to tell the compiler that the member is a type:
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/52e31b2599ee8fee1d60f096bebb224f71ab13d1/07/value_type.cpp#L1-L34
+https://github.com/CIS-1901-F24/Notes/blob/57c31bb0a48c6dcf311909887de4f3835d2d6dc2/06/value_type.cpp#L1-L34
 
 In this example, the compiler cannot know that the abstract `Container` type's member named `value_type` is a type, since `Container` can be instantiated with anything.
 So to help it along and make this code compile, we need to tell it that this member is supposed to be a type using `typename`.

@@ -7,7 +7,7 @@ This section will not be tested in the class, but it is very interesting to talk
 
 
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/b0a601390d9c0e037e5eabe1e0321f8e501b1fb2/08/CRTP.cpp#L7-L36
+https://github.com/CIS-1901-F24/Notes/blob/ea3ac76409ab3461948881888bb12cea3cbf8baf/07/CRTP.cpp#L7-L36
 
 CRTP allows you define the dog class to inherit from Animal which is templated on dog. When the animal class needs to use the "virtual" function sound, instead of dispatching a virtual call as you would had you been using an abstract class (look at refernce virtual implementation), you can call that function through the Derived template argument and avoid making a virtual function call, which has an overhead.
 
@@ -22,7 +22,7 @@ Using these instead of regular function arguments is sometimes *necessary*, for 
 
   
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/a8ddc9ab09f358b2251e53fc9c3704423c8d25be/08/array.cpp#L1-L23
+https://github.com/CIS-1901-F24/Notes/blob/ea3ac76409ab3461948881888bb12cea3cbf8baf/07/array.cpp#L1-L23
 
   
 
@@ -34,7 +34,7 @@ Other times, value template arguments are useful for performance, since, as usua
 
   
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/a8ddc9ab09f358b2251e53fc9c3704423c8d25be/08/pow.cpp#L1-L20
+https://github.com/CIS-1901-F24/Notes/blob/ea3ac76409ab3461948881888bb12cea3cbf8baf/07/pow.cpp#L1-L20
 
   
 
@@ -47,7 +47,7 @@ Doing this may also aid the compiler in doing optimizations, since it sees that 
 ##  Variadic Templates
 In some cases, the fucntions that you will attempt to write will not have a fixed number of arguments or argument types. An example of this is the `printf` function in `C`. You might have noticed that you can pass it virtually any number of types. While this is implemented in `C` using macros, C++ has a more convineint way of doing that using templates. C++ introduces variadic templates which make use of elipsis "`...`" to define any number of template arguments. To implement a variadic function, you will usually have a base case and a recursive implementation. For example, we can define our print function using variadic tempaltes.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/b0a601390d9c0e037e5eabe1e0321f8e501b1fb2/08/print.cpp#L1-L32
+https://github.com/CIS-1901-F24/Notes/blob/ea3ac76409ab3461948881888bb12cea3cbf8baf/07/print.cpp#L1-L32
 
 Notice that inside the variadic function, we also use the ellipsis to unpack the parameters. We can also use variadic templates to define classes that take an arbitrary number of template parameters. An example of this is `std::tuple`. `std::tuple` can be defined with any number of types like this `std::tuple<int, std::string, bool> t1; std::tuple<std::string, std::string> t2;` and so on. We will not go into details on how these are implemented since the implementation can be complex.
 
@@ -83,7 +83,7 @@ A variable that is declared `constexpr` means that it will be known as compile t
 
   
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/a8ddc9ab09f358b2251e53fc9c3704423c8d25be/08/constexpr1.cpp#L1-L26
+https://github.com/CIS-1901-F24/Notes/blob/ea3ac76409ab3461948881888bb12cea3cbf8baf/07/constexpr1.cpp#L1-L26
 
   
 
@@ -101,7 +101,7 @@ These restrictions are similar to pure functions in functional programming and a
 
   
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/a8ddc9ab09f358b2251e53fc9c3704423c8d25be/08/constexpr2.cpp#L1-L12
+https://github.com/CIS-1901-F24/Notes/blob/ea3ac76409ab3461948881888bb12cea3cbf8baf/07/constexpr2.cpp#L1-L12
 
   
 
@@ -137,7 +137,7 @@ Basically, it is possible to use class templates as a functional programming lan
 
   
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/a8ddc9ab09f358b2251e53fc9c3704423c8d25be/08/fib.cpp#L1-L24
+https://github.com/CIS-1901-F24/Notes/blob/ea3ac76409ab3461948881888bb12cea3cbf8baf/07/fib.cpp#L1-L24
 
   
 
@@ -171,7 +171,7 @@ This example will focus on counting how many steps it takes to reach 1, starting
 
   
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/a8ddc9ab09f358b2251e53fc9c3704423c8d25be/08/collatz.cpp#L1-L54
+https://github.com/CIS-1901-F24/Notes/blob/ea3ac76409ab3461948881888bb12cea3cbf8baf/07/collatz.cpp#L1-L54
 
   
 

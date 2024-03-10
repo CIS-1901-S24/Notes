@@ -1,4 +1,4 @@
-#  Class 9
+#  Class 8
 
   
 
@@ -8,11 +8,11 @@ For this week we will cover a few small topics, since the project are due next w
 
 Recall that `c++` offers two different types of references, lvalue references `T&` and rvalue references `T&&`. In some cases, you might want to have a function that catches both lvalues and rvalues references. To do that in `c++`, you wild need to declare your function to be a template function and use the `&&`. When there is type deduction involved, C++ will treat the `&&` syntax as something call universal references (more recently known as forwarding references).
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/c5482b8d1fd753be0a33dad0b53d900cde6b5b20/09/forwarding.cpp#L4-L8
+https://github.com/CIS-1901-F24/Notes/blob/67f67a719744a4f8e24bf0c626aca27767c4948d/08/forwarding.cpp#L4-L8
 
 In general, this is not very helpful, since if you wanted to have a function that will handle both rvalues and lvalues, you could have used a const lvalue reference, which can also bind to rvalues. This will however be useful if you already have seperate overloads for an lvalue and rvalue reference of some other functions that you want to conditionally call within your current template function, i.e forward the arguments that your function takes regardless of weather they are lvalue of rvalue. C++ uses the `std::forward<T>` function to allow to pass the arguments conserving their type, reference and constness information to other functions.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/c5482b8d1fd753be0a33dad0b53d900cde6b5b20/09/forwarding.cpp#L10-L24
+https://github.com/CIS-1901-F24/Notes/blob/67f67a719744a4f8e24bf0c626aca27767c4948d/08/forwarding.cpp#L10-L24
 
 This is generally known as perfect forwarding and is used in places like `std::make_unique`, `std::make_shared`, `std::make_pair` and `emplace` functions that we will cover in our 	`STL` class.
 
@@ -44,7 +44,7 @@ In addition to this, the constants that are part of the enumeration are placed i
 
   
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/e2b8d24bd8f2cea6c39906194dafefe9bde8ce1b/09/enum.cpp#L1-L14
+https://github.com/CIS-1901-F24/Notes/blob/67f67a719744a4f8e24bf0c626aca27767c4948d/08/enum.cpp#L1-L14
 
   
 
@@ -86,7 +86,7 @@ Values of this type holds either a value of type `T` or an "empty" value, which 
 
   
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/e2b8d24bd8f2cea6c39906194dafefe9bde8ce1b/09/optional.cpp#L1-L30
+https://github.com/CIS-1901-F24/Notes/blob/67f67a719744a4f8e24bf0c626aca27767c4948d/08/optional.cpp#L1-L30
 
   
 
@@ -130,7 +130,7 @@ This is a *tagged* union, meaning that the `variant` keeps track of which type i
 
   
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/e2b8d24bd8f2cea6c39906194dafefe9bde8ce1b/09/variant.cpp#L1-L25
+https://github.com/CIS-1901-F24/Notes/blob/67f67a719744a4f8e24bf0c626aca27767c4948d/08/variant.cpp#L1-L25
 
   
 
@@ -170,7 +170,7 @@ Alternatively, you can try to `any_cast` a pointer to an `any`, and that will re
 
   
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/e2b8d24bd8f2cea6c39906194dafefe9bde8ce1b/09/any.cpp#L1-L30
+https://github.com/CIS-1901-F24/Notes/blob/67f67a719744a4f8e24bf0c626aca27767c4948d/08/any.cpp#L1-L30
 
   
 

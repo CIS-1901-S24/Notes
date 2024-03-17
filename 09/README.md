@@ -26,7 +26,7 @@ The parameter list and return type of `operator()` can be fully customized, and 
 Since a function object is still a normal object, you could give the class some member variables in order to change its behavior:
 
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/214c85d4339503e830606f2374af7f9289fe602c/10/functor1.cpp#L1-L25
+https://github.com/CIS-1901-S24/Notes/blob/1d1e140815a465d31911bc0b3726670a8ef8fc92/09/functor1.cpp#L1-L25
 
   
 
@@ -35,7 +35,7 @@ The class of a function object can also be made into a class template, to accomo
 Then, a function template that expects a function argument can use a template argument to specify the type of the function, as shown in this example:
   
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/214c85d4339503e830606f2374af7f9289fe602c/10/functor2.cpp#L1-L40
+https://github.com/CIS-1901-S24/Notes/blob/1d1e140815a465d31911bc0b3726670a8ef8fc92/09/functor2.cpp#L1-L40
   
 
 This code uses the `predicate<T>` concept, which constrains the type to be something that can be called with a `T` and returns something that can be converted to a `bool`.
@@ -65,7 +65,7 @@ An even more useful feature for shortening your function object code is the *lam
 A lambda expression is basically shorthand for declaring a function object (not the class of that function object!):
 
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/214c85d4339503e830606f2374af7f9289fe602c/10/lambda.cpp#L1-L19
+https://github.com/CIS-1901-S24/Notes/blob/1d1e140815a465d31911bc0b3726670a8ef8fc92/09/lambda.cpp#L1-L19
   
 
 The syntax is fairly straightforward, allowing you to write the parameter list and body of the function as usual.
@@ -97,7 +97,7 @@ Finally, `[=]` and `[&]` capture *everything* by value and reference respectivel
 
   
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/214c85d4339503e830606f2374af7f9289fe602c/10/capture.cpp#L1-L24
+https://github.com/CIS-1901-S24/Notes/blob/1d1e140815a465d31911bc0b3726670a8ef8fc92/09/capture.cpp#L1-L24
 
   
 
@@ -107,7 +107,7 @@ This is basically shorthand for declaring a template class for a function object
 
   
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/214c85d4339503e830606f2374af7f9289fe602c/10/generic_lambda.cpp#L1-L14
+https://github.com/CIS-1901-S24/Notes/blob/1d1e140815a465d31911bc0b3726670a8ef8fc92/09/generic_lambda.cpp#L1-L14
 
   
 
@@ -132,7 +132,7 @@ More sophisticated functional programming is also possible.
 
 `bind` in `<functional>` partially applies a function, a useful operation for functional programming:
   
-https://github.com/CIS-1900-F23/Fall-2023/blob/4e908cb2be74b7632f3555d247aabb59c75a41ec/10/bind.cpp#L21-L31
+https://github.com/CIS-1901-S24/Notes/blob/1d1e140815a465d31911bc0b3726670a8ef8fc92/09/bind.cpp#L21-L31
 
 To specify that an argument should be left unbound, use `placeholders::_1`, `placeholders::_2`, etc . (in order).
 
@@ -140,7 +140,7 @@ In this example, we use `bind` to set the  last two arguments of `f` to `40` and
 
 We can also bind to lambdas, member functions and data members and nest bindings as you can see through the rest of the examples.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/4e908cb2be74b7632f3555d247aabb59c75a41ec/10/bind.cpp#L33-L44
+https://github.com/CIS-1901-S24/Notes/blob/1d1e140815a465d31911bc0b3726670a8ef8fc92/09/bind.cpp#L33-L44
 
 ###  Function Types
 
@@ -155,7 +155,7 @@ An alternative is `std::function<T>`, which is a class that can hold any callabl
 This is useful for writing recursive lambdas, since `auto` needs to know the type of what it's capturing, but that type depends on itself:
 
   
-https://github.com/CIS-1900-F23/Fall-2023/blob/214c85d4339503e830606f2374af7f9289fe602c/10/recursion.cpp#L1-L17
+https://github.com/CIS-1901-S24/Notes/blob/1d1e140815a465d31911bc0b3726670a8ef8fc92/09/recursion.cpp#L1-L17
 
   
 In this example, we need to capture by reference since capturing by value gets an uninitialized `function`.
@@ -168,7 +168,7 @@ There are also other methods to create recursive lambdas, but this is the most s
 `function` is also useful for storing a heterogeneous collction of functions with the same function signature, but not necessarily the same type:
 
   
-https://github.com/CIS-1900-F23/Fall-2023/blob/214c85d4339503e830606f2374af7f9289fe602c/10/functions.cpp#L1-L29
+https://github.com/CIS-1901-S24/Notes/blob/1d1e140815a465d31911bc0b3726670a8ef8fc92/09/functions.cpp#L1-L29
 
   
 

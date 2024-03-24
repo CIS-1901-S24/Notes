@@ -22,7 +22,7 @@ All standard library containers provide the `.size()` and `.empty()` member func
 `vector` also allows users to access elements using `[...]` as with an array.
 It further provides `.push_back(i)` to add a new element `i` to the back of the `vector` (by copy/move, just as with other function arguments), increasing the size of the `vector` by one.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/214c85d4339503e830606f2374af7f9289fe602c/10/vector.cpp#L1-L18
+https://github.com/CIS-1901-S24/Notes/blob/7dcb18131e3d3d9a5d2124ae6a71a603cd4fd82e/10/vector.cpp#L1-L18
 
 As seen in this example, just as with normal arrays, `vector`s (and all other standard library containers) support the range-based for loop.
 
@@ -39,7 +39,7 @@ For more details, see [this SO question](https://stackoverflow.com/questions/286
 To slightly improve performance, there is an alternative to `push_back` to adding new elements to a `vector` called `emplace_back`.
 `emplace_back` takes the arguments of an object constructor and initializes the object *in* the `vector`, avoiding the copy or move necessary when creating the object then using `.push_back`:
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/214c85d4339503e830606f2374af7f9289fe602c/10/emplace.cpp#L1-L25
+https://github.com/CIS-1901-S24/Notes/blob/7dcb18131e3d3d9a5d2124ae6a71a603cd4fd82e/10/emplace.cpp#L1-L25
 
 This example also shows what happens when the internal array needs to be resized.
 
@@ -48,7 +48,7 @@ Using `[i]` to access elements of the `vector` directly accesses the underlying 
 There is, of course, some overhead to doing this.
 Tests show that it is around 10%, but this will differ on different machines and architectures.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/214c85d4339503e830606f2374af7f9289fe602c/10/range.cpp
+https://github.com/CIS-1901-S24/Notes/blob/7dcb18131e3d3d9a5d2124ae6a71a603cd4fd82e/10/range.cpp
 
 Note that in these examples we have sometimes initialized `vector`s with their contents inside `{}`, like an array.
 This differs from how we've been initializing objects.
@@ -64,7 +64,7 @@ Benefits to using `array` are that it stores its size (using `.size()`, like oth
 There is *no* runtime overhead at all to using `array` over C arrays, since the `array` operations can be translated to operations over a C array at compile time.
 If you are using plain C fixed-length arrays on the stack, then you should be using `array` instead!
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/214c85d4339503e830606f2374af7f9289fe602c/10/array.cpp#L1-L34
+https://github.com/CIS-1901-S24/Notes/blob/7dcb18131e3d3d9a5d2124ae6a71a603cd4fd82e/10/array.cpp#L1-L34
 
 This code is also an example of template argument deduction, where some type arguments (in `<>`) can be omitted if the compiler can deduce them.
 Here, the number of elements and their type can be deduced.
@@ -74,7 +74,7 @@ Here, the number of elements and their type can be deduced.
 `list` (in the `<list>` header) provides a doubly-linked list.
 In addition to the common operations that other containers provide, `list`s also allow you to push or emplace to the front:
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/214c85d4339503e830606f2374af7f9289fe602c/10/list.cpp#L1-L16
+https://github.com/CIS-1901-S24/Notes/blob/7dcb18131e3d3d9a5d2124ae6a71a603cd4fd82e/10/list.cpp#L1-L16
 
 As usual with a linked list, direct access to elements via `[...]` is not available.
 
@@ -125,7 +125,7 @@ A `map` (in the `<map>` header) is an associative container that is typically im
 `[]` returns a reference to the value corresponding to a key if the key exists in the map.
 If it doesn't yet exist, it will be added with a corresponding default-initialized value.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/214c85d4339503e830606f2374af7f9289fe602c/10/map1.cpp#L1-L21
+https://github.com/CIS-1901-S24/Notes/blob/7dcb18131e3d3d9a5d2124ae6a71a603cd4fd82e/10/map1.cpp#L1-L21
 
 Other familiar member functions are also available, like a checked access using `.at(i)`, `.size()`, `.empty()`, and `.erase()`.
 `.insert(...)` and `.emplace(...)` are also available, though they do not take an iterator to the location to insert at, since `map`s maintain their own order.
@@ -136,7 +136,7 @@ To use a custom class for the key type, this class should be comparable using `o
 If neither element is less than the other (i.e. `!(a < b) && !(b < a)`) then the `map` will consider `a` and `b` equivalent.
 In the following example a wrong implementation of `operator<` results in two objects not being considered equal when they are in fact equal:
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/214c85d4339503e830606f2374af7f9289fe602c/10/map2.cpp#L1-L45
+https://github.com/CIS-1901-S24/Notes/blob/7dcb18131e3d3d9a5d2124ae6a71a603cd4fd82e/10/map2.cpp#L1-L45
 
 Other ordering operations (like `>` instead of `<`) can also be specified for a `map`, which we'll see when we talk about function objects in a few classes.
 
@@ -156,7 +156,7 @@ Unlike other languages where the hashing function is a member function, C++ does
 This approach requires virtual calls for common functionality like calling the hash function, which is additional performance overhead.
 As with custom comparison operations, we'll cover custom hash functions when we talk about function objects in a few classes.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/214c85d4339503e830606f2374af7f9289fe602c/10/unordered_map.cpp#L1-L21
+https://github.com/CIS-1901-S24/Notes/blob/7dcb18131e3d3d9a5d2124ae6a71a603cd4fd82e/10/unordered_map.cpp#L1-L21
 
 Like its name suggests, `unordered_map` is not ordered, so iterating through one using iterators does not always go in sorted order.
 Prefer `unordered_map` to `map` for the improved performance, unless the sorted order iteration is useful for your use case or writing a good hash function for your key type is too difficult.
@@ -197,7 +197,7 @@ See the image on [this page](https://en.cppreference.com/w/cpp/container/vector/
 
 Finally, one can move to the next element in the sequence using `++`:
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/d49fe6779961c1277631fc31a017b933e92cb355/11/iterator1.cpp#L1-L16
+https://github.com/CIS-1901-S24/Notes/blob/7dcb18131e3d3d9a5d2124ae6a71a603cd4fd82e/10/iterator1.cpp#L1-L16
 
 As a side note, the range-based for loop (e.g. `for (auto i : l)`) uses iterators and thus works for any container that provides them.  
 
@@ -261,7 +261,7 @@ It just uses `-` for random access iterators, but for other kinds of iterators i
 This is undefined behavior if `last` is not actually reachable from `first`.
 
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/d49fe6779961c1277631fc31a017b933e92cb355/11/iterator2.cpp#L1-L14
+https://github.com/CIS-1901-S24/Notes/blob/7dcb18131e3d3d9a5d2124ae6a71a603cd4fd82e/10/iterator2.cpp#L1-L14
   
 ##  Member Functions
 
@@ -269,7 +269,7 @@ In Addition to the functions we have seen in the last class, STL containers usua
 
 `insert(it)` and `erase(it)` will add an element after the element pointed to by it or remove that element respectively.  This allows you to remove or insert arbitrarly inside a container. These are very useful in conjuctions with some functions we are going to see soon. These functions are defined for the majority of containers. Examples are `vector`, `map`, `list`, etc.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/d49fe6779961c1277631fc31a017b933e92cb355/11/insert_erase.cpp#L1-L26
+https://github.com/CIS-1901-S24/Notes/blob/7dcb18131e3d3d9a5d2124ae6a71a603cd4fd82e/10/insert_erase.cpp#L1-L26
 
   
 ##  `<algorithm>`
@@ -286,7 +286,7 @@ Most of these are function templates that take iterator arguments.
 
 A range-based for loop is often simpler for an entire container, but `for_each` allows the exact range to be specified.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/d49fe6779961c1277631fc31a017b933e92cb355/11/for_each.cpp#L1-L18
+https://github.com/CIS-1901-S24/Notes/blob/7dcb18131e3d3d9a5d2124ae6a71a603cd4fd82e/10/for_each.cpp#L1-L18
 
  
 `find(first, last, v)` returns an iterator to the first place where `v` is found in the range, or the end iterator `last` if no match is found.
@@ -295,11 +295,11 @@ A very common use of find is to use with the earlier mentioned `insert` or `eras
 
 There are also `find_if` and `find_if_not` variants that take a predicate rather than just a value.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/d49fe6779961c1277631fc31a017b933e92cb355/11/find.cpp#L1-L27
+https://github.com/CIS-1901-S24/Notes/blob/7dcb18131e3d3d9a5d2124ae6a71a603cd4fd82e/10/find.cpp#L1-L27
 
 This example gives a taste of the variety of functions available in `<algorithm>`:
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/d49fe6779961c1277631fc31a017b933e92cb355/11/algorithms.cpp#L1-L48
+https://github.com/CIS-1901-S24/Notes/blob/7dcb18131e3d3d9a5d2124ae6a71a603cd4fd82e/10/algorithms.cpp#L1-L48
 
   
 `iota` fills a range with an incrementing sequence, starting at some value.
@@ -336,29 +336,29 @@ This means that these functions cannot directly affect the size of the container
 
 For example, `remove` shifts the elements in the range to remove some elements, and returns a new end of range iterator. The underlying container's size is unchanged:  
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/d49fe6779961c1277631fc31a017b933e92cb355/11/remove1.cpp#L1-L22
+https://github.com/CIS-1901-S24/Notes/blob/7dcb18131e3d3d9a5d2124ae6a71a603cd4fd82e/10/remove1.cpp#L1-L22
 
 One option to modify the container is by directly referring to it.
 
 For example, after calling `remove`, we can call `erase` on the container using the iterator returned by `remove`:
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/d49fe6779961c1277631fc31a017b933e92cb355/11/remove2.cpp#L1-L16
+https://github.com/CIS-1901-S24/Notes/blob/7dcb18131e3d3d9a5d2124ae6a71a603cd4fd82e/10/remove2.cpp#L1-L16
 
 As another example, `copy` assumes there is enough space in the destination container to copy the source range:
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/d49fe6779961c1277631fc31a017b933e92cb355/11/copy1.cpp#L1-L14
+https://github.com/CIS-1901-S24/Notes/blob/7dcb18131e3d3d9a5d2124ae6a71a603cd4fd82e/10/copy1.cpp#L1-L14
 
  
 One solution is to ensure there is enough space by resizing before calling `copy`:
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/d49fe6779961c1277631fc31a017b933e92cb355/11/copy2.cpp#L1-L16
+https://github.com/CIS-1901-S24/Notes/blob/7dcb18131e3d3d9a5d2124ae6a71a603cd4fd82e/10/copy2.cpp#L1-L16
 
 Another solution is to use an iterator that knows more about the container.
 
 For example `back_inserter`, `inserter`, and `front_inserter` (in `<iterator>`) create special iterators that call `push_back`, `insert`, and `push_front` respectively, so the container grows when something is written via the iterator:
 
  
-https://github.com/CIS-1900-F23/Fall-2023/blob/d49fe6779961c1277631fc31a017b933e92cb355/11/copy3.cpp#L1-L17
+https://github.com/CIS-1901-S24/Notes/blob/7dcb18131e3d3d9a5d2124ae6a71a603cd4fd82e/10/copy3.cpp#L1-L17
 
 
 ###  Iterator Invalidation
@@ -376,7 +376,7 @@ To deal with this, we use the return value of `erase`, which returns an iterator
 To prevent the element following the erased element from being skipped in the loop, the loop only increments `it` if nothing was erased.
 
  
-https://github.com/CIS-1900-F23/Fall-2023/blob/d49fe6779961c1277631fc31a017b933e92cb355/11/iterator3.cpp#L1-L27
+https://github.com/CIS-1901-S24/Notes/blob/7dcb18131e3d3d9a5d2124ae6a71a603cd4fd82e/10/iterator3.cpp#L1-L27
 
  
 See [this chart](https://en.cppreference.com/w/cpp/container#Iterator_invalidation) for a summary of the invalidation rules.

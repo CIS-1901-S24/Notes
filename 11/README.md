@@ -43,7 +43,7 @@ unordered maps and sets use the `hash` functor for hasing keys. `hash` is implem
 
 One way to provide a hash function for a custom key class is to write your own class for a functor, and pass that to the `unordered_map` to use instead of `std::hash`:
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/d49fe6779961c1277631fc31a017b933e92cb355/11/hash1.cpp#L1-L32
+https://github.com/CIS-1901-S24/Notes/blob/5d923b5535b40171eb41607542e69ff9c4925c83/11/hash1.cpp#L1-L32
 
 This hash function uses bitwise xor (`^`) and left bitshift (`<<`) to combine the hash values of the first and last name (obtained using `std::hash`) in a "random-looking" way.
 
@@ -61,7 +61,7 @@ For all other types without a specialization, trying to use `std::hash` will res
 
 So for your own class, you can write a specialization of `std::hash` for it:
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/d49fe6779961c1277631fc31a017b933e92cb355/11/hash2.cpp#L1-L35  
+https://github.com/CIS-1901-S24/Notes/blob/5d923b5535b40171eb41607542e69ff9c4925c83/11/hash2.cpp#L1-L35  
 
 Since `hash` is inside the `std` namespace, we first need to "open" the `std` namespace.
 
@@ -72,7 +72,7 @@ The `template<>` with the empty `<>` is required to tell the compiler that this 
 
 Since Hash is a functor, we can also use lambdas for defining the hash.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/d49fe6779961c1277631fc31a017b933e92cb355/11/hash1.cpp#L33-L40
+https://github.com/CIS-1901-S24/Notes/blob/5d923b5535b40171eb41607542e69ff9c4925c83/11/hash1.cpp#L33-L40
  
 ###  Ordered Associative Containers
 
@@ -85,13 +85,13 @@ Objects of this type are function objects that take two `Key`s and returns the r
 The standard library also provides `greater<Key>`, `less_equal<Key>`, and `greater_equal<Key>`, though the ones involving equality are likely not suitable, as shown by the [example](../09/map2.cpp) from class 9.
 
   
-https://github.com/CIS-1900-F23/Fall-2023/blob/d49fe6779961c1277631fc31a017b933e92cb355/11/map.cpp#L1-L37
+https://github.com/CIS-1901-S24/Notes/blob/5d923b5535b40171eb41607542e69ff9c4925c83/11/map.cpp#L1-L37
 
 Remember that just as with `std::hash`, the template argument is a *type*, where every object of this type is a function object, and each of these function objects behaves identically.
 
 Since this is also a functor, we can lambda syntax to define custom equality.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/d49fe6779961c1277631fc31a017b933e92cb355/11/map.cpp#L38-L39
+https://github.com/CIS-1901-S24/Notes/blob/5d923b5535b40171eb41607542e69ff9c4925c83/11/map.cpp#L38-L39
 
 
 ### Others
@@ -108,7 +108,7 @@ A few classes ago we talked about concepts and how they can make templates code 
 
 For example, std::sort should work with containers that provides random access iterators. Therefore, you should expect it to work on vectors but not sets. If you uncomment the call to sort on set, you will see that it fails to compiling and prints (on my device) 312 line of errors.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/d49fe6779961c1277631fc31a017b933e92cb355/11/ranges.cpp#L1-L31
+https://github.com/CIS-1901-S24/Notes/blob/5d923b5535b40171eb41607542e69ff9c4925c83/11/ranges.cpp#L1-L31
 
 Now, uncomment the same example using ranges and you will see that there is less (23 lines on my device) lines of error printed and a very clear messages about the requirement for random access iterator not being met.
 
@@ -150,7 +150,7 @@ Once a thread is initialized, at some point you must tell it how you want it to 
 If you don't call either, once the `thread` goes out of scope, its destructor will terminate the program, which makes signalling your intent mandatory.
 A similar class called `jthread` (for joinable thread) is the same as a `thread`, except it will call `.join()` in its destructor.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/ae41bd0296adbd4437b11b4e3405e70048cba720/12/thread.cpp#L1-L24
+https://github.com/CIS-1901-S24/Notes/blob/5d923b5535b40171eb41607542e69ff9c4925c83/11/thread.cpp#L1-L24
 
 The return value of the `thread`'s task is ignored, so we must use a reference to return a value back to the main thread.
 However, in this example we must wrap the argument passed by reference with `ref`.
@@ -167,7 +167,7 @@ We will discuss some common synchronization primitives in the next section, but 
 The `async` function (in the `<future>` header) allows you to perform a task *asynchronously*, that is, without waiting for the task to finish as with sequential code, and getting the task's return value later.
 This can be thought of as separating the function *call* from its *return value*.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/ae41bd0296adbd4437b11b4e3405e70048cba720/12/async.cpp#L1-L30
+https://github.com/CIS-1901-S24/Notes/blob/5d923b5535b40171eb41607542e69ff9c4925c83/11/async.cpp#L1-L30
 
 The return value of the `async` call is a `future`, holding the return value which only exists "in the future".
 Once you have the `future`, you can call `.get()` on it to get the return value.
@@ -187,12 +187,12 @@ If the task requires shared variables or synchronization, you likely want someth
 
 `future`s can also propagate exceptions thrown in the task, rethrowing them when `.get()` is called on the `future`:
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/ae41bd0296adbd4437b11b4e3405e70048cba720/12/async_exception.cpp#L1-L24
+https://github.com/CIS-1901-S24/Notes/blob/5d923b5535b40171eb41607542e69ff9c4925c83/11/async_exception.cpp#L1-L24
 
 One final thing to note is that `future`s returned by `async` will block in their destructor until the task is finished and the return value is ready.
 This means that if you don't store hte returned `future` in a variable, then it will be immediately destroyed and block, essentially making the `async` call synchronous rather than asynchronous:
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/ae41bd0296adbd4437b11b4e3405e70048cba720/12/async_sync.cpp#L1-L20
+https://github.com/CIS-1901-S24/Notes/blob/5d923b5535b40171eb41607542e69ff9c4925c83/11/async_sync.cpp#L1-L20
 
 This is specific for `future`s obtained from `async`, and not for the general `future`s in the next section.
 
@@ -201,7 +201,7 @@ This is specific for `future`s obtained from `async`, and not for the general `f
 More generally, `future`s can represent any result that is provided in the future, not just return values from functions.
 This is done using a complementary object called a `promise`, an object representing a "promise" to produce a value later, to be passed to a user through a `future`:
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/ae41bd0296adbd4437b11b4e3405e70048cba720/12/promise.cpp#L1-L20
+https://github.com/CIS-1901-S24/Notes/blob/5d923b5535b40171eb41607542e69ff9c4925c83/11/promise.cpp#L1-L20
 
 A `promise` has a `future` associated with it, which is obtained using `.get_future()`.
 This member function can only be called once for each `promise`, and calling again is undefined behavior.
@@ -212,7 +212,7 @@ Sometimes, many threads will want the result of a `future`, but `.get()` can onl
 We could take the return value of `.get()` and share it, but then we have to wait until it's ready in a single thread, then distribute afterwards.
 More conveniently, a `shared_future` allows multiple `thread`s to wait independently on a result, and can be created from a regular `future` using `.share()` (which also invalidates the original `future`).
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/ae41bd0296adbd4437b11b4e3405e70048cba720/12/shared_future.cpp#L1-L29
+https://github.com/CIS-1901-S24/Notes/blob/5d923b5535b40171eb41607542e69ff9c4925c83/11/shared_future.cpp#L1-L29
 
 ### `packaged_task`
 
@@ -220,7 +220,7 @@ The final "simple" concurrency class we'll see is `packaged_task`.
 A `packaged_task` basically wraps a function with the capability to return a `future`, allowing us to easily transfer the return value or any thrown exceptions to another thread.
 Since the object wraps a function, the function's type must be specified in the angle brackets following the `packaged_task` type.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/ae41bd0296adbd4437b11b4e3405e70048cba720/12/packaged_task.cpp#L1-L20
+https://github.com/CIS-1901-S24/Notes/blob/5d923b5535b40171eb41607542e69ff9c4925c83/11/packaged_task.cpp#L1-L20
 
 Since the `packaged_task` owns resources (the task and the internal state for managing the `future`), it cannot be copied and must be `move`d.
 Using `packaged_task`s and `thread`s can be thought of as a "lower-level" alternative to `async`, where the programmer has more control.
@@ -256,35 +256,35 @@ To release ownership, the `thread` owning the `mutex` must call `.unlock()`.
 The code between a `.lock()` and `.unlock()` is called a *critical section*.
 Multiple threads cannot be in the critical section concurrently.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/ae41bd0296adbd4437b11b4e3405e70048cba720/12/mutex.cpp#L1-L30
+https://github.com/CIS-1901-S24/Notes/blob/5d923b5535b40171eb41607542e69ff9c4925c83/11/mutex.cpp#L1-L30
 
 ### Locking `mutex`s
 
 Using `.lock()` and `.unlock()` on a mutex is not ideal.
 Like using `new` and `delete` manually, this results in no exception safety guarantee:
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/ae41bd0296adbd4437b11b4e3405e70048cba720/12/mutex_exception.cpp#L1-L29
+https://github.com/CIS-1901-S24/Notes/blob/5d923b5535b40171eb41607542e69ff9c4925c83/11/mutex_exception.cpp#L1-L29
 
 When the exception is thrown, the `.unlock()` call is skipped, and this results in the other `thread` waiting for the `mutex` forever.
 Like memory, a `mutex` is a resource, so using RAII to acquire and release the resource is essential here.
 `scoped_lock` is an RAII class that does this.
 It locks a `mutex` on construction and unlocks it on destruction:
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/ae41bd0296adbd4437b11b4e3405e70048cba720/12/scoped_lock.cpp#L1-L29
+https://github.com/CIS-1901-S24/Notes/blob/5d923b5535b40171eb41607542e69ff9c4925c83/11/scoped_lock.cpp#L1-L29
 
 This time, the `mutex` will always be unlocked, no matter how we exit the code block.
 
 Another problem with `mutex` is the possibility of deadlock.
 A deadlock occurs when multiple `thread`s acquire and hold a `mutex` while waiting for another `mutex`:
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/ae41bd0296adbd4437b11b4e3405e70048cba720/12/deadlock.cpp#L1-L46
+https://github.com/CIS-1901-S24/Notes/blob/5d923b5535b40171eb41607542e69ff9c4925c83/11/deadlock.cpp#L1-L46
 
 The classic solution to this is to require all threads to acquire `mutex`s in the same order.
 Rather than inspecting the code, an easy way to do this is to use a single `scoped_lock`.
 `scoped_lock` can take multiple `mutex`s as arguments in its constructor, which will use a deadlock-avoiding algorithm to acquire them all.
 This algorithm will never block trying to acquire one of the `mutex`s while owning another of the `mutex`s, avoiding deadlock.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/ae41bd0296adbd4437b11b4e3405e70048cba720/12/scoped_lock_deadlock.cpp#L1-L46
+https://github.com/CIS-1901-S24/Notes/blob/5d923b5535b40171eb41607542e69ff9c4925c83/11/scoped_lock_deadlock.cpp#L1-L46
 
 ### Sharing With Reader and Writer Threads
 
@@ -296,7 +296,7 @@ Multiple `thread`s can all own the `shared_mutex` at the shared level, but only 
 Only one `thread` can acquire the `shared_mutex` at the exclusive level at a time, and only if the `shared_mutex` is not acquired.
 To acquire the `shared_mutex` at the different levels, we have RAII classes like `scoped_lock`, `shared_lock` and `unique_lock` for the shared and exclusive levels respectively.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/ae41bd0296adbd4437b11b4e3405e70048cba720/12/shared_mutex.cpp#L1-L44
+https://github.com/CIS-1901-S24/Notes/blob/5d923b5535b40171eb41607542e69ff9c4925c83/11/shared_mutex.cpp#L1-L44
 
 In this example, multiple reader threads are in the critical section at the same time, which you can see by the occasionally interleaved prints.
 
@@ -318,7 +318,7 @@ We pass the `unique_lock` to this function, which releases the lock and suspends
 To wake up `thread`s waiting on `condition_variable`s, a `thread` that changes the condition can call `.notify_one()` or `.notify_all()` to wake up one or all waiting `thread`s on that `condition_variable`.
 When a thread wakes up, it will acquire the `unique_lock` again to leave the `.wait()`, to ensure that there is still only one `thread` in the critical section.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/ae41bd0296adbd4437b11b4e3405e70048cba720/12/condition_variable.cpp#L1-L46
+https://github.com/CIS-1901-S24/Notes/blob/5d923b5535b40171eb41607542e69ff9c4925c83/11/condition_variable.cpp#L1-L46
 
 In this example, note that we check the condition using a while loop.
 This is to guard against *spurious wakeup*, where the condition variable wakes up, but the condition is not actually true yet.
@@ -345,6 +345,10 @@ an atomic variable of any template type (as long as it supports specific operati
 In other words, the read of the current value and the store for the incrmeneted value happen atomically and therefore, you will always get a consistent result. Another interesting
 fact about atomic is that is done through hardware and no the operating system, so it is generally more efficient.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/ae41bd0296adbd4437b11b4e3405e70048cba720/12/atmoic.cpp#L5-L35
+https://github.com/CIS-1901-S24/Notes/blob/5d923b5535b40171eb41607542e69ff9c4925c83/11/atomic.cpp#L1-L35
 
 If you run this example a few times, you will notice that the regular may be incorrect, but the atomic count will always be correct.
+
+
+There are a few more mechanisms, but we don't have the time to cover anything. For example barriers and latches. Additionaly, some of the topics may be intimidating if it is the first time seeing them.
+Concurrency is a complex topic and requires understanding of operating systems. Taking an OS class will help you understand these topics better.

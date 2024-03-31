@@ -18,9 +18,9 @@ For games that were too simple, we required that they add some additional featur
 ## Deadlines
 
 - Proposal: Due Wednesday Apr 10, 11:59 PM
-- Proposal resubmittion if needed: Due Wednesday Apr 17, 11:59 PM
-- Checkpoint: Short meeting during class, Apr 24
-- Completed project and presentation: Due in class, May 1
+- Proposal resubmittion if needed: Due Saturday Apr 13, 11:59 PM
+- Checkpoint: Short meeting during class on Thursday, Apr 18
+- Completed project and presentation: Due in class on Thursday, Apr 25
 
 There are no late submissions for these deadlines, start early! You can start as soon as your proposal is approved.
 

@@ -1,4 +1,4 @@
-# Class 12
+# Class 11
 
 In this week's notes we'll wrap up STL and go over the concurrency features of the C++ standard library.
 

@@ -19,11 +19,9 @@ chars can be easily converted to ints, and we can do arithmetic operations on th
 There are a few modifiers that can provide some extra information about the size and signedness of the type.
 
 #### `signed` and `unsigned` 
-signed and usigned will tell us whether the int is signed or not. If no midifiers are used, the int is assumed to be signed. The modifiers can also be used without the keyword int. for example `unsigned` just means `unsigned int`. `unsigned` values never flow. For example:
+signed and usigned will tell us whether the int is signed or not. If no midifiers are used, the int is assumed to be signed. The modifiers can also be used without the keyword int. for example `unsigned` just means `unsigned int`. `unsigned` values will overflow if the result of the computation is negative. For example:
 
 https://github.com/CIS-1901-S24/Notes/blob/d1cfb0702a02b9a3c0c348002250a28e54c8f6f5/12/unsigned.cpp#L5-L6  
-
-Notes that in this example, we have used `10u`
 
 #### `short`, `long` and `long long`
 These modifiers control the size of the int. Short will have at least 16 bits, long will have at least 32 bits and long long will have at least 64 bits. The exact size will depend on the platform.
@@ -40,7 +38,7 @@ The modifiers we discussed are unforunately not standarized across platform. `lo
 
 Fixed data types are generally in the format [u]intxx_t where u is optional for specifying singed vs unsigned and xx is the size of the integer. This types are macro definitions that expand to the correct defintion for that exact size based on your platform. For example, `uint32_t` will guarantee an unsigned int of 32 bits. I personally think it is always best practice to always use those so that you are always certain what the size of your type will be.
 
-https://github.com/CIS-1901-S24/Notes/blob/d1cfb0702a02b9a3c0c348002250a28e54c8f6f5/12/unsigned.cpp#L6-L14  
+https://github.com/CIS-1901-S24/Notes/blob/70dd5cb8203de601f5bd9c89cfe5f80eb2fc71c7/12/fixed-width.cpp#L6-L14  
 
 ##  C++ Build Systems
 

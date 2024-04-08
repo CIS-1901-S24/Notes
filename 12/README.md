@@ -68,31 +68,31 @@ The most important abstraction that linux provides is the socket. A socket is id
 
 For the next examples, we will focus on TCP, but keep in mind that UDP still has very good applications and is in some times the obvious choice to use.
 
-1) For establishing the connection, there is usually a lot of boilerplate code you need to do for setting up the sockets and the connection. Generally, one side would create a server and listen for connections, and the other side will connect to that server. Here is a demo of the client and server side code for doing that.
+- For establishing the connection, there is usually a lot of boilerplate code you need to do for setting up the sockets and the connection. Generally, one side would create a server and listen for connections, and the other side will connect to that server. Here is a demo of the client and server side code for doing that.
 
-Server Side
-https://github.com/CIS-1901-S24/Notes/blob/5d923b5535b40171eb41607542e69ff9c4925c83/12/Networking/server.cpp#L13-L44  
+#### Server Side
+https://github.com/CIS-1901-S24/Notes/blob/7db405da90c012725e23f1c1d6b5e46a4f419043/12/Networking/server.cpp#L13-L44  
 
-Accepting connections
-https://github.com/CIS-1901-S24/Notes/blob/5d923b5535b40171eb41607542e69ff9c4925c83/12/Networking/server.cpp#L51-L58  
+#### Accepting connections
+https://github.com/CIS-1901-S24/Notes/blob/7db405da90c012725e23f1c1d6b5e46a4f419043/12/Networking/server.cpp#L51-L58  
 
-client side
-https://github.com/CIS-1901-S24/Notes/blob/5d923b5535b40171eb41607542e69ff9c4925c83/12/Networking/client.cpp#L17-L32
+#### client side
+https://github.com/CIS-1901-S24/Notes/blob/7db405da90c012725e23f1c1d6b5e46a4f419043/12/Networking/client.cpp#L17-L32
 
 
-2) Once the conenction has been established, both sides get a file descriptor to the socket that will be used for the communication. You can read data from the socket or send data through the socket. 
+- Once the conenction has been established, both sides get a file descriptor to the socket that will be used for the communication. You can read data from the socket or send data through the socket. 
 
-reading
-https://github.com/CIS-1901-S24/Notes/blob/5d923b5535b40171eb41607542e69ff9c4925c83/12/Networking/utils.cpp#L14-L15
+#### reading
+https://github.com/CIS-1901-S24/Notes/blob/7db405da90c012725e23f1c1d6b5e46a4f419043/12/Networking/utils.cpp#L14-L15
 
 Since TCP sends a receives data as a stream, you can read the stream chunk by chunk where you call read on the socket fd and pass in a buffer. The OS will read what's available in the socket and return to you how many bytes were read. If the return value is 0, that means the connection has been closed or and EOF was sent. If it is less than zero, this means there was some error. If there is not enough data, the call will block until there is enough data and return a positive value or zero.
 
-writing
-https://github.com/CIS-1901-S24/Notes/blob/5d923b5535b40171eb41607542e69ff9c4925c83/12/Networking/utils.cpp#L53-L64
+#### writing
+https://github.com/CIS-1901-S24/Notes/blob/7db405da90c012725e23f1c1d6b5e46a4f419043/12/Networking/utils.cpp#L53-L64
 
 Calls to write are not guaranteed to succeed. They return how many bytes they managed to send. Therefore, you must keep attempting to write the remaining bytes in your message until success in a lop.
 
-3) Sockets are resources that need to be cleaned up. After the end of the session, you need to close the socket. In generally, if you working within a class, you should clean up all sockets on destruction.
+- Sockets are resources that need to be cleaned up. After the end of the session, you need to close the socket. In generally, if you working within a class, you should clean up all sockets on destruction.
 
 
 With this in mind, I wrote down some boilerplate code and basic class defintions for a server and client for chatroom application. In class, we will walk through building more features for this application and hopefully this should provide some good practive on how to write some slightly longer progras than what we have been doing over class and be helpful for your final projects.

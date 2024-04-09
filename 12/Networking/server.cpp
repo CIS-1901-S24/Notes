@@ -80,10 +80,6 @@ void Server::accept_connections()
         }
 
         // TODO: Complete
-        // int  index  = _connections.size();
-        // auto thread = std::make_unique<std::thread>(&Server::handle_connection, this, index);
-        // _connections.push_back({std::move(thread), CCB::Status::OPEN, comm_fd});
-        // thread_cleanup();
     }
 }
 

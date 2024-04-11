@@ -49,7 +49,7 @@ You may need to answer some follow-up questions if your proposal is not detailed
 
 ## Checkpoint
 
-This checkpoint will be an in-class meeting during class on Apr 24.
+This checkpoint will be an in-class meeting during class on Apr 18.
 You will discuss any issues you may be having with the project so far.
 If needed, we can discuss any changes you need to make to your plan.
 The goal of this checkpoint is just to make sure you make some progress by this time and not leave the project to the last minute.

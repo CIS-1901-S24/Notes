@@ -30,6 +30,8 @@ void Client::connect_to(int port, const std::string& address)
     {
         std::cerr << "unable to connect";
     }
+
+    _fd = sockfd;
 }
 
 void Client::run()

@@ -40,8 +40,7 @@ void Client::run()
     std::string message{};
     while (getline(std::cin, message))
     {
-        bool success = send_data(_fd, message);
-        std::cout << (success ? "success" : " fail");
+        send_data(_fd, message);
         auto response = reader.receive_data();
         if (response.has_value())
         {

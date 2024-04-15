@@ -41,7 +41,7 @@ As we mentioned in the intro. C++ gives you the tools and lower-level control to
 
 In general use references and const as much as possible. You should pass values by const ref unless you have a reason not to do so. This also applies to the use of auto in range-based loops. Accidentally passing by value instead of reference can easily make your program much slower, so this is the first thing to look for.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/0e20d56d7ba2ffd856709c29e3c9e0862ba5c3fb/13/references1.cpp#L6-L26
+https://github.com/CIS-1901-S24/Notes/blob/87cecbac5d9c30afd099d78ab3718bef32cae421/13/references1.cpp#L6-L26
 
 In this contrived example, we have managed a 1000x speed up by simply passing values by const ref instead of by value
 <pre>
@@ -59,7 +59,7 @@ Also, Define variables as const unless you have a reason not to. Surprisingly, t
 
 One interesting trick I saw a while back is that if you are repeatedly accessing a value in a data structure or class, it is best to grab a reference to it. For example, consider the following two functions.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/0e20d56d7ba2ffd856709c29e3c9e0862ba5c3fb/13/references2.cpp#L10-L32
+https://github.com/CIS-1901-S24/Notes/blob/87cecbac5d9c30afd099d78ab3718bef32cae421/13/references2.cpp#L10-L32
 
 These two examples achieve the same thing. Accessing values from a nested hash map requires first computing the hash value, finding the right bucket, following a linked list, and doing the same thing for the inner hash map. Since the value is being accessed multiple times, it is redundant to perform all of that work to access it multiple times. Instead, you can do that once, save a reference to the object, and use that reference every time you need to access the object without needing to repeat all the steps to access it.
 
@@ -99,7 +99,7 @@ Arenas allows you to reserve a pool of memory at once and manually manage it. Th
 #### 1.6 Types precision
 C++ has many integer types that vary in size. You might be used to writing everything as an `int`. However, C++ `int` is a 32 (in most cases, but it is platform dependent) bits integer. If we have prior that our actual data won't need 32 bits, we can use a more precise type. For example, if we use `uint8_t` which is an 8-bit unsigned integer (0 - 255), we can achieve almost double the performance.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/0e20d56d7ba2ffd856709c29e3c9e0862ba5c3fb/13/types.cpp#L10-L30
+https://github.com/CIS-1901-S24/Notes/blob/87cecbac5d9c30afd099d78ab3718bef32cae421/13/types.cpp#L10-L30
 
 Benchmark:
 <pre>
@@ -120,7 +120,7 @@ The hot path of most applications is a loop that processes data and produces out
 
 A very easy optimization is to use emplace over push whenever you want to add an object to a data structure
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/0e20d56d7ba2ffd856709c29e3c9e0862ba5c3fb/13/emplace.cpp#L9-L26
+https://github.com/CIS-1901-S24/Notes/blob/87cecbac5d9c30afd099d78ab3718bef32cae421/13/emplace.cpp#L9-L26
 
 Benchmark results:
 <pre>
@@ -145,7 +145,7 @@ if you want to find the kth smallest element in a data structure, you might sort
 Data structures like `std::list`, and `std::map` don't store all their elements in contiguous memory. This is extremely inefficient for cache, and should generally be avoided in any performance-critical application unless you absolutely need them. This effect can be significantly stronger than asymptotic performance. For example, although `list` and `vector` should both have constant time push back asymptotic complexity, in practice, vector is about 5-10 times faster and in some cases can even be about 40x faster.
 
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/0e20d56d7ba2ffd856709c29e3c9e0862ba5c3fb/13/contigous.cpp#L10-L22
+https://github.com/CIS-1901-S24/Notes/blob/87cecbac5d9c30afd099d78ab3718bef32cae421/13/contigous.cpp#L10-L22
 
 Benchmark:
 <pre>
@@ -165,7 +165,7 @@ In C++, the memory layout of classes generally follows the order in which they a
 #### 3.1 Padding
 
 Consider the following 2 almost identical class definitions.
-https://github.com/CIS-1900-F23/Fall-2023/blob/0e20d56d7ba2ffd856709c29e3c9e0862ba5c3fb/13/padding.cpp#L3-L21
+https://github.com/CIS-1901-S24/Notes/blob/87cecbac5d9c30afd099d78ab3718bef32cae421/13/padding.cpp#L3-L21
 
 Notice that the first class has size 24 bytes and the second has size 16 bytes. This is a result of padding. In C++, padding refers to the insertion of additional bytes between structure members or class data members by the compiler, with the goal of aligning the members in memory in a way such that memory access is aligned based on the architecture. Padding is primarily introduced for performance reasons, as aligned memory access can be more efficient on certain architectures. However, this can have drawbacks as it will leave a lot of memory unused making the effective capacity of your cache smaller. Yan avoid some of these issues by arranging your struct in order of larger to smaller data members.
 
@@ -175,7 +175,7 @@ Now, our next example is a little bit more different. Consider the following cla
 
 A common pattern is to define a substruct for each class containing hot and cold data respectively like this.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/0e20d56d7ba2ffd856709c29e3c9e0862ba5c3fb/13/hodata.cpp#L4-L23
+https://github.com/CIS-1901-S24/Notes/blob/87cecbac5d9c30afd099d78ab3718bef32cae421/13/hodata.cpp#L4-L23
 
 If you are doing extensive file processing, you might be attempting to access for example the path to the file and the id of the file very often. You might be interested in saving some other metadata, but this will not be referenced often or may not be used at all in the hot path. Therefore, you want to make sure when you access a file struct, you get the important first without needing to access a second cache line. Therefore, placing the important data first will ensure that. To make it easy to modify, using a struct to define hot and cold data is helpful.
 
@@ -189,11 +189,11 @@ Another very important concept is struct of arrays vs array of structs. Imagine 
 
 Now, if cache lines are 4 bytes for example, each byte you are interested in accessing will be in a different cache line. This is very inefficient.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/0e20d56d7ba2ffd856709c29e3c9e0862ba5c3fb/13/struct_of_arrays.cpp#L7-L22
+https://github.com/CIS-1901-S24/Notes/blob/87cecbac5d9c30afd099d78ab3718bef32cae421/13/struct_of_arrays.cpp#L7-L22
 
 If we know in advance that our access patterns will look like this and instead designed this application such that all students are one struct that consists of separate arrays for each property, looping over students to access their grades can easily be done by looping over the grades array and now everything is contiguous in memory. Another advantage of this design is that now we can use SIMD operations, which we will mention in a second to improve the performance.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/0e20d56d7ba2ffd856709c29e3c9e0862ba5c3fb/13/struct_of_arrays.cpp#L24-L39
+https://github.com/CIS-1901-S24/Notes/blob/87cecbac5d9c30afd099d78ab3718bef32cae421/13/struct_of_arrays.cpp#L24-L39
 
 <pre>
 
@@ -217,14 +217,14 @@ The compiler is your best ally for optimization. While 90% of the time the compi
 Inlining is one of the most powerful optimizations. From CIS 2400, You probably remember that a function call requires multiple instructions from moving stack framing, pushing arguments, etc, which are best avoided if we can. You can give the compiler a hint that you want to inline some specific functions by using the compiler hint `
 __attribute__((always_inline))`. Note that there is another keyword called `inline` but counterintuitively, this does not actually inline and is used for other purposes (it still hints the compiler to inline, and the compiler will most likely ignore it).
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/0e20d56d7ba2ffd856709c29e3c9e0862ba5c3fb/13/inline.cpp#L1-L20
+https://github.com/CIS-1901-S24/Notes/blob/87cecbac5d9c30afd099d78ab3718bef32cae421/13/inline.cpp#L1-L20
 
 Inlining is not always the best choice. For example, you might have code that isn't executed often and that is long and you don't want to inline so that it is not located near the rest of our core logic. (This is helpful because instructions, like data, are also cached and there is limited cache capacity. We want to reserve the more important instructions.)
 
 #### 4.2 Branch Prediction
 All modern processors have a pipelined design where multiple instructions are being executed simultaneously at different stages. When there is a branch instruction, the processor doesn't know the outcome until very late stages which means if the processor starts executing some path, but turns out the branch outcome is a different path, it needs to flush out the pipeline. This is extremely costly and modern processors have put a lot of effort into accurate branch prediction. Helping your processor predict branches correctly is a huge performance boost. If you have some prior on what branches/outcomes are more likely, you can pass that information into your compiler to organize the code in the best way that helps predict the correct branch. You can do this in GCC with `__builtin_expect`. In C++ 20, this has been generalized across platforms in `[[likely]]` and `[[unlikely]]`. For example:
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/0e20d56d7ba2ffd856709c29e3c9e0862ba5c3fb/13/likely.cpp#L3-L12
+https://github.com/CIS-1901-S24/Notes/blob/87cecbac5d9c30afd099d78ab3718bef32cae421/13/likely.cpp#L3-L12
 
 #### 4.3 Builtin Prefecth
 
@@ -232,7 +232,7 @@ As we have seen, cache lines are generally very small and sometimes you are acce
 
 For example:
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/0e20d56d7ba2ffd856709c29e3c9e0862ba5c3fb/13/prefetch.cpp#L7-L25
+https://github.com/CIS-1901-S24/Notes/blob/87cecbac5d9c30afd099d78ab3718bef32cae421/13/prefetch.cpp#L7-L25
 
 In This program, we are doing a binary search. Since the compiler generally has no way of knowing our access pattern, we can instruct it to prefetch the addresses we expect to access in the next iteration, which is the middle of the right and left halves.
 
@@ -258,7 +258,7 @@ With all of these compiler hint techniques, always measure the performance gains
 
 This overlaps with understanding C++ to a large extent, but sometimes, API Design can help improve performance. Consider the scenario where we want to have a function that takes in some data, processes it, and returns a string. You may define it like this.
 
-https://github.com/CIS-1900-F23/Fall-2023/blob/0e20d56d7ba2ffd856709c29e3c9e0862ba5c3fb/13/string.cpp#L5-L20
+https://github.com/CIS-1901-S24/Notes/blob/87cecbac5d9c30afd099d78ab3718bef32cae421/13/string.cpp#L5-L20
 
 If we expect this code to be executed in a loop, a better API design is to let the user pass in a reference to a string and we fill it for them. The advantage of this is now the user can allocate the buffer string outside of their loop and pass in the same reference, while in contrast, the previous design will force us to allocate new memory for the string on each iteration.
 
